@@ -1,0 +1,5 @@
+How to untie a program from the global filesystem:
+* No CWD
+* No `..`
+* No root
+* All paths only from env vars or command arguments (preferably the former, it's just a little more convenient for reuse and already has names), only appending to paths gotten that way (like "${CONFIG_PATH}/env_vars.env" or just "${CONFIG_PATH}", NEVER "/somepath/${VARPATH}" - breaks incapsulation)

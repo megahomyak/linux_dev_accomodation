@@ -7,3 +7,6 @@ How to untie a program from the global filesystem:
 * All binaries are functions (like plain C functions, i.e. with no context attached, no globals as well)
 * All files are arguments (directories included, that is, every file, really)
 * All paths are refences
+
+Even better incapsulation: no directories at all, instead just files with loadable env vars with paths
+* This makes a new rule: no path concatenation with a literal, e.g. "$USERFILES/$USERFILE" is allowed, but "$CONFIGDIR/config.cfg" is not

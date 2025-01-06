@@ -10,3 +10,5 @@ How to untie a program from the global filesystem:
 
 Even better incapsulation: no directories at all, instead just files with loadable env vars with paths
 * This makes a new rule: no path concatenation with a literal, e.g. "$USERFILES/$USERFILE" is allowed, but "$CONFIGDIR/config.cfg" is not
+
+The simplest way would be to either use chroot when running programs (that's what containers do) or just having prefixes for everything (basically the same as chroot, actually). But the referency approach seems kinda nice

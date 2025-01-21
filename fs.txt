@@ -1,14 +1,5 @@
 How to untie a program from the global filesystem:
-* No CWD
-* No `..`
-* No root
-* All paths only from env vars or command arguments (preferably the former, it's just a little more convenient for reuse and already has names), only appending to paths gotten that way (like "${CONFIG_PATH}/env_vars.env" or just "${CONFIG_PATH}", NEVER "/somepath/${VARPATH}" - breaks incapsulation)
-
-* All binaries are functions (like plain C functions, i.e. with no context attached, no globals as well)
-* All files are arguments (directories included, that is, every file, really)
-* All paths are refences
-
-Even better incapsulation: no directories at all, instead just files with loadable env vars with paths
-* This makes a new rule: no path concatenation with a literal, e.g. "$USERFILES/$USERFILE" is allowed, but "$CONFIGDIR/config.cfg" is not
-
-The simplest way would be to either use chroot when running programs (that's what containers do) or just having prefixes for everything (basically the same as chroot, actually). But the referency approach seems kinda nice
+* Run every executable from the directory it is in, so it will be able to access its surrounding files
+* Do not use `..` or FS root at all, instead use paths passed in by the caller (for example, through env variables)
+* `.` (that is, any path that starts with "./", or "." itself) should only be used to access other parts of the same executable (for example, when it's one script consisting of several files)
+This ruleset allows all programs to have independent storages (like the program being a C++ `class` and all its storages being its "instances" that are able to operate fully independently) and enables the caller to orchestrate such programs
